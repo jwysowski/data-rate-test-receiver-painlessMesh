@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <painlessMesh.h>
-#include <PubSubClient.h>
+// #include <PubSubClient.h>
 #include <WiFiClient.h>
 
 #define   MESH_PREFIX     "esp_mesh"
@@ -12,21 +12,21 @@
 
 #define HOSTNAME "Gateway"
 
-const char *alive = "gate/alive";
-const char *report = "gate/report";
+// const char *alive = "gate/alive";
+// const char *report = "gate/report";
 
 // Prototypes
 void received_callback(const uint32_t &from, const String &msg);
-void mqtt_callback(char *topic, byte *payload, unsigned int length);
+// void mqtt_callback(char *topic, byte *payload, unsigned int length);
 
-IPAddress getlocal_ip();
+// IPAddress getlocal_ip();
 
-IPAddress my_ip(0, 0, 0, 0);
-IPAddress mqtt_broker(192, 168, 31, 22);
+// IPAddress my_ip(0, 0, 0, 0);
+// IPAddress mqtt_broker(192, 168, 31, 22);
 
 painlessMesh mesh;
 WiFiClient wifi;
-PubSubClient mqtt(mqtt_broker, 1883, mqtt_callback, wifi);
+// PubSubClient mqtt(mqtt_broker, 1883, mqtt_callback, wifi);
 
 void setup() {
 	// Serial.begin(9600);
@@ -50,23 +50,24 @@ void setup() {
 
 void loop() {
 	mesh.update();
-	mqtt.loop();
+	// mqtt.loop();
 
-	if (my_ip != getlocal_ip()) {
-		my_ip = getlocal_ip();
+	// if (my_ip != getlocal_ip()) {
+	// 	my_ip = getlocal_ip();
 
-		if (mqtt.connect("gate"))
-			mqtt.publish(alive, "Ready!");        
-	}
+	// 	if (mqtt.connect("gate"))
+	// 		mqtt.publish(alive, "Ready!");        
+	// }
 }
 
 void received_callback(const uint32_t &from, const String &msg) {
-	mqtt.publish(report, msg.c_str());
+	// mqtt.publish(report, msg.c_str());
+	Serial.println(msg);
 }
 
-void mqtt_callback(char *topic, uint8_t *payload, unsigned int length) {
-}
+// void mqtt_callback(char *topic, uint8_t *payload, unsigned int length) {
+// }
 
-IPAddress getlocal_ip() {
-	return IPAddress(mesh.getStationIP());
-}
+// IPAddress getlocal_ip() {
+// 	return IPAddress(mesh.getStationIP());
+// }
