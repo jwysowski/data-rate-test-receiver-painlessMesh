@@ -29,7 +29,7 @@ WiFiClient wifi;
 PubSubClient mqtt(mqtt_broker, 1883, mqtt_callback, wifi);
 
 void setup() {
-	Serial.begin(9600);
+	// Serial.begin(9600);
 
 	// mesh.setDebugMsgTypes(ERROR | MESH_STATUS | CONNECTION | SYNC | COMMUNICATION | GENERAL | MSG_TYPES | REMOTE);   // all types on
 	// mesh.setDebugMsgTypes( ERROR | STARTUP | CONNECTION );  // set before init() so that you can see startup messages
@@ -65,16 +65,6 @@ void received_callback(const uint32_t &from, const String &msg) {
 }
 
 void mqtt_callback(char *topic, uint8_t *payload, unsigned int length) {
-	char *clean_payload = (char *)malloc(length + 1);
-
-	memcpy(clean_payload, payload, length);
-	clean_payload[length] = '\0';
-	String msg = String(clean_payload);
-
-	free(clean_payload);
-
-	String target = String(topic);
-    mqtt.publish(report, msg.c_str());
 }
 
 IPAddress getlocal_ip() {
