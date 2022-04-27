@@ -77,7 +77,7 @@ void mqtt_callback(char *topic, uint8_t *payload, unsigned int length) {
 	free(clean_payload);
 
 	String target = String(topic);
-    mqtt.publish(report, str.c_str());
+    mqtt.publish(report, msg.c_str());
 }
 
 IPAddress getlocal_ip() {
