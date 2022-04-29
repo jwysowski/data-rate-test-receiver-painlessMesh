@@ -29,7 +29,7 @@ WiFiClient wifi;
 // PubSubClient mqtt(mqtt_broker, 1883, mqtt_callback, wifi);
 
 void setup() {
-	// Serial.begin(9600);
+	Serial.begin(9600);
 
 	// mesh.setDebugMsgTypes(ERROR | MESH_STATUS | CONNECTION | SYNC | COMMUNICATION | GENERAL | MSG_TYPES | REMOTE);   // all types on
 	// mesh.setDebugMsgTypes( ERROR | STARTUP | CONNECTION );  // set before init() so that you can see startup messages
