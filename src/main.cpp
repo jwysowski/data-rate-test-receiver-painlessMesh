@@ -27,6 +27,8 @@ void received_callback(const uint32_t &from, const String &msg);
 painlessMesh mesh;
 WiFiClient wifi;
 // PubSubClient mqtt(mqtt_broker, 1883, mqtt_callback, wifi);
+uint16_t message_counter = 0;
+bool send_message_counter = false;
 
 void setup() {
 	Serial.begin(9600);
@@ -58,11 +60,17 @@ void loop() {
 	// 	if (mqtt.connect("gate"))
 	// 		mqtt.publish(alive, "Ready!");        
 	// }
+	
+	if (send_message_counter)
+		Serial.println(message_counter);
 }
 
 void received_callback(const uint32_t &from, const String &msg) {
 	// mqtt.publish(report, msg.c_str());
-	Serial.println(msg);
+	if (!msg.equals("stop"))
+		message_counter++;
+	else
+		send_message_counter = true;
 }
 
 // void mqtt_callback(char *topic, uint8_t *payload, unsigned int length) {
